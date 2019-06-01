@@ -1,8 +1,12 @@
 {
-  "name": "react-app-boilerplate",
+  "name": "react-app",
   "version": "0.1.4",
-  "description": "React application boilerplate",
-  "author": "Cássio Zen",
+  "description": "React application",
+  "author": "xiaomei",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/fml077/pro-react.git"
+  },
   "license": "ISC",
   "scripts": {
     "start": "webpack-dev-server --progress",
