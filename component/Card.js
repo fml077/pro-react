@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import CheckList from './CheckList';
 
 // card组件：标题、说明、代码清单
@@ -9,6 +9,9 @@ class Card extends Component {
         this.state = {
             showDetails: false
         }
+    }
+    toggleDetails() {
+        this.setState({showDetails: !this.state.showDetails})
     }
     render() {
         let cardDetails;
@@ -22,13 +25,19 @@ class Card extends Component {
         }
         return (
             <div className='card'>
-                <div className='card_title' onClick={
-                    () => this.setState({showDetails: !this.state.showDetails})
-                }>{this.props.title}</div>
+                <div className='card_title' onClick={this.toggleDetails.bind(this)}>{this.props.title}</div>
                 {cardDetails}
             </div>
         )
     }
+}
+
+Card.PropTypes = {
+    id: PropTypes.number,
+    title: PropTypes.String,
+    description: PropTypes.String,
+    color: PropTypes.String,
+    tasks: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default Card;

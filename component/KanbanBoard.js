@@ -1,7 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import List from './List';
 
 class KanbanBoard extends Component {
+    constructor() {
+        super();
+        this.state = {
+            val: 0
+        }
+    }
+    componentDidMount() {
+        this.setState({val: this.state.val + 1});
+        console.log(this.state.val);    // 第 1 次 log
+    
+        this.setState({val: this.state.val + 1});
+        console.log(this.state.val);    // 第 2 次 log
+    
+        setTimeout(() => {
+          this.setState({val: this.state.val + 1});
+          console.log(this.state.val);  // 第 3 次 log
+    
+          this.setState({val: this.state.val + 1});
+          console.log(this.state.val);  // 第 4 次 log
+        }, 0);
+    }
     render() {
         return (
             <div className="app">
@@ -17,6 +38,10 @@ class KanbanBoard extends Component {
             </div>
         )
     }
+}
+
+KanbanBoard.PropTypes = {
+    cards: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default KanbanBoard;
