@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {render} from 'react-dom';
-import { Router, Route, Link } from 'react-router';
+import { Router, Route, IndexRoute, Link } from 'react-router';
 import About from './component/about';
 import Home from './component/home';
 import Repos from './component/repos';
@@ -23,10 +23,11 @@ class App extends Component {
     );
   }
 }
-
+// IndexRoute设置默认路由 默认首页
 render((
   <Router>
     <Route path="/" component={App}>
+      <IndexRoute component={Home}/>
       <Route path="about" component={About}></Route>
       <Route path="repos" component={Repos}></Route>
     </Route>
