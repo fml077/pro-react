@@ -33,7 +33,7 @@ import KanbanBoard from '../component/KanbanBoard';
 let cardsList = [{
     "id": 1,
     "title": "Monday",
-    "description": "quia et suscipit\nsuscipit recusandae consequo",
+    "description": "look at [github](https://github.com/pro-react)",
     "status": 'todo',
     "tasks": [{
       "id": 1,

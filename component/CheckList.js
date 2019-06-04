@@ -1,25 +1,32 @@
 import React, { Component, PropTypes } from 'react';
 
 class CheckList extends Component {
+    checkInputKeyPress(evt) {
+        if (evt.key === 'Enter') {
+            this.props.taskCallbacks.add(this.props.cardId, evt.target.value)
+            evt.target.value = ''
+        }
+    }
     render () {
-        let tasks = this.props.tasks.map((task) => (
+        let tasks = this.props.tasks.map((task, taskIndex) => (
             <li className='checklist_task' key={task.id} id={task.id}>
-                <input type="checkbox" defaultChecked={task.done}/>
-                {task.name}
-                <a className='checklist_task-remove'></a>
+                <input type="checkbox" checked={task.done} onChange={this.props.taskCallbacks.toggle.bind(null, this.props.cardId, task.id, taskIndex)} />
+                {task.name} {' '}
+                <a className='checklist_task-remove' onClick={this.props.taskCallbacks.delete.bind(null, this.props.cardId, task.id, taskIndex)}></a>
             </li>
         ))
 
         return (
             <div className='checklist'>
                 <ul>{tasks}</ul>
-                <input type='text' className='checklist--add-task' placeholder='Type then hit Enter to add a task'/>
+                <input type='text' className='checklist--add-task' onKeyPress={this.checkInputKeyPress.bind(this)} placeholder='Type then hit Enter to add a task'/>
             </div>
         )
     }
 }
 CheckList.PropTypes = {
     cardId: PropTypes.number,
-    tasks: PropTypes.arrayOf(PropTypes.object)
+    tasks: PropTypes.object,
+    taskCallbacks: PropTypes.object
 }
 export default CheckList;
