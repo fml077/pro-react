@@ -4,7 +4,8 @@ import React, {
 import {
   render
 } from 'react-dom';
-import KanbanBoard from '../component/KanbanBoard';
+import KanbanBoardContainer from '../component/KanbanBoardContainer'
+// import KanbanBoard from '../component/KanbanBoard';
 
 
 // class FoodList extends Component {
@@ -89,4 +90,6 @@ let cardsList = [{
   }
 ]
 
-render(<KanbanBoard cards={cardsList} />, document.getElementById('root'))
+// render(<KanbanBoard cards={cardsList} />, document.getElementById('root'))
+
+render(<KanbanBoardContainer />, document.getElementById('root'))

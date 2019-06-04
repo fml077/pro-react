@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import update from 'react-addons-update'
 import KanbanBoard from './KanbanBoard';
-import 'babel-loader'
+import 'babel-polyfill'
 import 'whatwg-fetch'
 // 远程获取数据
 const API_URL = 'http://kanbanapi.pro-react.com'; // 这是测试接口
@@ -19,9 +19,13 @@ class KanbanBoardContainer extends Component {
     }
     componentDidMount() {
         fetch(API_URL + '/cards', { headers: API_HEADERS })
-        .then((response) => response.json())
+        .then((response) => {
+            console.log('fetch res',response)
+           return response.json()
+        })
         .then((responseData) => {
-            this.setState({cards: responseData})
+            console.log('responseData',responseData)
+            responseData && this.setState({cards: responseData})
             // 保存旧的state对象 以便发生问题时回滚到这个旧对象上
             window.state = this.state;
         })
@@ -119,11 +123,11 @@ class KanbanBoardContainer extends Component {
         })
     }
     render() {
-        return<KanbanBoard cards={this.state.cards} taskCallbacks={{
+        return (<KanbanBoard cards={this.state.cards} taskCallbacks={{
             add: this.addTask.bind(this),
             delete: this.deleteTask.bind(this),
             toggle: this.toggleTask.bind(this)
-        }} />
+        }} />)
     }
 }
 
