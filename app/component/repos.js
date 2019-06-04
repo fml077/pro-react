@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class REPOS extends Component {
+class Repos extends Component {
     render() {
         return(
             <h1>REPOS PAGE</h1>
@@ -8,4 +8,4 @@ class REPOS extends Component {
     }
 }
 
-export default REPOS;
+export default Repos;
