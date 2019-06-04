@@ -4,7 +4,7 @@ import KanbanBoard from './KanbanBoard';
 import 'babel-polyfill'
 import 'whatwg-fetch'
 // 远程获取数据
-const API_URL = 'http://kanbanapi.pro-react.com'; // 这是测试接口
+const API_URL = 'http://kanbanapi.pro-react.com'; // 这是测试接口,添加到数据将会在24小时后自动删除
 const API_HEADERS = {
     'Content-Type': 'application/json',
     Authorization: 'none'
