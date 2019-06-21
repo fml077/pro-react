@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {render} from 'react-dom';
+import AnimatedShoppingList from '../components/AnimatedShoppingList'
 
 class App extends Component {
   render(){
     return (
-      <h1>Hello World</h1>
+      <AnimatedShoppingList />
     );
   }
 }
