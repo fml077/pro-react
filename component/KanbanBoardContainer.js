@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import update from 'react-addons-update'
 import KanbanBoard from './KanbanBoard';
+import {throttle} from '../utils/utils.js'
 import 'babel-polyfill'
 import 'whatwg-fetch'
 // 远程获取数据
@@ -16,6 +17,10 @@ class KanbanBoardContainer extends Component {
         this.state = {
             cards: []
         }
+        // 当参数改变才执行
+        this.updateCardStatus = throttle(this.updateCardStatus.bind(this));
+        // 当参数改变才执行 或者时间间隔大于500毫秒才执行
+        this.updateCardPosition = throttle(this.updateCardPosition.bind(this),500)
     }
     componentDidMount() {
         fetch(API_URL + '/cards', { headers: API_HEADERS })
@@ -164,8 +169,8 @@ class KanbanBoardContainer extends Component {
             delete: this.deleteTask.bind(this),
             toggle: this.toggleTask.bind(this)
         }} cardCallbacks={{
-            updateStatus: this.updateCardStatus.bind(this),
-            updatePosition: this.updateCardPosition.bind(this)
+            updateStatus: this.updateCardStatus,
+            updatePosition: this.updateCardPosition
         }}
         />)
     }
