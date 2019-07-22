@@ -122,12 +122,52 @@ class KanbanBoardContainer extends Component {
             this.setState(prevState)
         })
     }
+    // 更新card组件状态
+    updateCardStatus(cardId, listId) {
+        // 找到card index
+        let cardIndex = this.state.cards.findIndex((card)=>card.id == cardId);
+        // 获取当前cardid
+        let card = this.state.cards[cardIndex]
+        if (card.status != listId) {
+            this.setState(update(this.state, {
+                cards: {
+                    [cardIndex]: {
+                        status: {$set: listId}
+                    }
+                }
+            }))
+        }
+    }
+    // 更新card组件位置
+    updateCardPosition (cardId, afterId) {
+        if (cardId != afterId) {
+            // 找到card index
+            let cardIndex = this.state.cards.findIndex((card)=>card.id == cardId);
+            // 获取当前cardid
+            let card = this.state.cards[cardIndex]
+            // 找到拖拽的card index
+            let afterIndex = this.state.cards.findIndex((card)=>card.id==afterId)
+            // 用splice方法移除card并重新插入到一个新到index
+            this.setState(update(this.state, {
+                cards: {
+                    $splice: [
+                        [cardIndex, 1],
+                        [afterIndex, 0, card]
+                    ]
+                }
+            }))
+        }
+    }
     render() {
         return (<KanbanBoard cards={this.state.cards} taskCallbacks={{
             add: this.addTask.bind(this),
             delete: this.deleteTask.bind(this),
             toggle: this.toggleTask.bind(this)
-        }} />)
+        }} cardCallbacks={{
+            updateStatus: this.updateCardStatus.bind(this),
+            updatePosition: this.updateCardPosition.bind(this)
+        }}
+        />)
     }
 }
 
