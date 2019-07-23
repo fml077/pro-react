@@ -20,6 +20,7 @@
     "history": "^1.17.0",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
-    "react-router": "^1.0.3"
+    "react-router": "^1.0.3",
+    "whatwg-fetch": "^3.0.0"
   }
 }

@@ -4,3 +4,25 @@ body {
 #root {
   height: 100%;
 }
+menu {
+  background-color: #ccc;
+  padding: 5px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+menu ul {
+  margin: 0;
+  padding: 0;
+}
+menu li {
+  display: inline-block;
+}
+menu li a {
+  color: #444;
+  text-decoration: none;
+  margin-right: 10px;
+}
+menu li a.active {
+  color: blue;
+  font-weight: bold;
+}
