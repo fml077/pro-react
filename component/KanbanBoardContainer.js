@@ -163,6 +163,34 @@ class KanbanBoardContainer extends Component {
             }))
         }
     }
+    // 持久化card位置和状态
+    // 使用fetch函数调用api 传递card新状态和位置，如果调用失败需要在界面把卡片恢复到之前的状态
+    // persistCardDrag方法在cardCallbacks对象内部可见从而可在Card组件中调用
+    persistCardDrag (cardId, status) {
+        let cardIndex = this.state.cards.findIndex((card)=>cardId == cardId)
+        let card = this.state.cards[cardIndex]
+        fetch(`${API_URL}/cards/${cardId}`, {
+            method: 'put',
+            headers: API_HEADERS,
+            body: JSON.stringify({status: card.status, row_order_position:cardIndex})
+        })
+        .then((response)=>{
+            if (!response.ok) {
+                throw new Error("Server response wasn't ok")
+            }
+        })
+        .catch((error)=>{
+            console.log('Fetch error:',error)
+            this.setState(update(this.state, {
+                cards: {
+                    [cardIndex]: {
+                        status: { $set: status }
+                    }
+                }
+            }))
+        })
+
+    }
     render() {
         return (<KanbanBoard cards={this.state.cards} taskCallbacks={{
             add: this.addTask.bind(this),
@@ -170,7 +198,8 @@ class KanbanBoardContainer extends Component {
             toggle: this.toggleTask.bind(this)
         }} cardCallbacks={{
             updateStatus: this.updateCardStatus,
-            updatePosition: this.updateCardPosition
+            updatePosition: this.updateCardPosition,
+            persistCardDrag: this.persistCardDrag.bind(this)
         }}
         />)
     }
