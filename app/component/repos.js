@@ -28,7 +28,7 @@ class Repos extends Component {
     render() {
         let repos = this.state.repositories.map((repo) => (
             <li key={repo.id}>
-                <Link to={"/repos/details/" + repo.id}>{repo.name}</Link>
+                <Link to={"/repos/" + repo.id}>{repo.name}</Link>
             </li>
         ))
         // 子组件上克隆并注入props：React.cloneElement将额外的props传递给由Router所提供的children

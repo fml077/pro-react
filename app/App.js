@@ -29,9 +29,9 @@ render((
   <Router>
     <Route path="/" component={App}>
       <IndexRoute component={Home}/>
-      <Route path="/about" component={About} title="About Us"></Route>
-      <Route path="/repos" component={Repos}>
-        <Route path="details/:id" component={RepoDetails} />
+      <Route path="about" component={About} title="About Us"></Route>
+      <Route path="repos" component={Repos}>
+        <Route path="/repos/:id" component={RepoDetails} />
       </Route>
     </Route>
   </Router>
