@@ -14,7 +14,11 @@ class Repos extends Component {
         fetch('https://jsonplaceholder.typicode.com/comments')
         .then((response) => {
             console.log('response:',response)
-            return response.json()
+            if (response.ok) {
+                return response.json()
+            } else {
+                throw new Error('Server response was not ok')
+            }
         })
         .then((resposeData) => {
             console.log('resposeData:',resposeData)
@@ -23,6 +27,10 @@ class Repos extends Component {
             this.setState({
                 repositories: resposeData
             })
+        })
+        .catch((error) => {
+            // 捕获错误 跳转到ServerError组件错误页面
+            this.props.history.pushState(null, '/error');
         })
     }
     render() {

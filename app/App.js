@@ -5,6 +5,7 @@ import About from './component/about';
 import Home from './component/home';
 import Repos from './component/repos';
 import RepoDetails from './component/repoDetails';
+import ServerError from './component/serverError';
 
 // 用原生方式实现路由
 class App extends Component {
@@ -33,6 +34,7 @@ render((
       <Route path="repos" component={Repos}>
         <Route path="/repos/:id" component={RepoDetails} />
       </Route>
+      <Route path="error" component={ServerError}></Route>
     </Route>
   </Router>
   ), document.getElementById('root'));
