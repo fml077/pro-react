@@ -31,13 +31,18 @@ class Repos extends Component {
                 <Link to={"/repos/details/" + repo.id}>{repo.name}</Link>
             </li>
         ))
+        // 子组件上克隆并注入props：React.cloneElement将额外的props传递给由Router所提供的children
+        let child = this.props.children && React.cloneElement(
+            this.props.children,
+            { repositories: this.state.repositories }
+        )
         return(
             <div>
                 <h1>Github REPOS PAGE</h1>
                 <ul>
                     {repos}
                 </ul>
-                {this.props.children}
+                {child}
             </div>
         )
     }
